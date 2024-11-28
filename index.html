@@ -7,19 +7,10 @@
     <style>
         body { margin: 0; overflow: hidden; }
         img { position: absolute; }
-        .scene { display: none; }
     </style>
 </head>
 <body>
-    <!-- 初期シーン -->
-    <div id="scene1" class="scene">
-        <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
-    </div>
-
-    <!-- 次のシーン -->
-    <div id="scene2" class="scene">
-        <h1>新しいシーンに切り替わりました！</h1>
-    </div>
+    <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
 
     <script>
         var player = document.getElementById('player');
@@ -42,29 +33,29 @@
 
         // キー入力イベントをリッスン
         window.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowLeft') {
-                x -= 15; // 左に移動
-            } else if (event.key === 'ArrowRight') {
-                x += 15; // 右に移動
-            } else if (event.key === 'ArrowUp') {
-                y -= 15; // 上に移動
-            } else if (event.key === 'ArrowDown') {
-                y += 15; // 下に移動
-            }
+            if (event.key === 'ArrowLeft') { x -= 15; }
+            if (event.key === 'ArrowRight') { x += 15; }
+            if (event.key === 'ArrowUp') { y -= 15; }
+            if (event.key === 'ArrowDown') { y += 15; }
 
             // 新しい位置を適用
             player.style.left = x + 'px';
             player.style.top = y + 'px';
         });
 
-        // クリックイベントでシーン切り替え
+        // クリック時に場面切り替え
         document.body.addEventListener('click', function() {
             var scene1 = document.getElementById('scene1');
             var scene2 = document.getElementById('scene2');
-
-            // シーン1を隠し、シーン2を表示
             scene1.style.display = 'none';
             scene2.style.display = 'block';
+
+            fetch('https://your-api-url.com/run-python')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('python-result').textContent = data.result;
+                })
+                .catch(error => console.error('Error:', error));
         });
     </script>
 </body>
