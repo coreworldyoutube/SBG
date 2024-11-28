@@ -1,0 +1,2 @@
+# SBG
+Sugoi Bokuno game
