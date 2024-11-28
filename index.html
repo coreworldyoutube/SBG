@@ -7,10 +7,20 @@
     <style>
         body { margin: 0; overflow: hidden; }
         img { position: absolute; }
+        .scene { display: none; }
     </style>
 </head>
 <body>
-    <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
+    <!-- シーン1 -->
+    <div id="scene1" class="scene">
+        <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
+    </div>
+
+    <!-- シーン2 -->
+    <div id="scene2" class="scene">
+        <h1>Pythonコード結果:</h1>
+        <pre id="python-result"></pre>
+    </div>
 
     <script>
         var player = document.getElementById('player');
@@ -43,16 +53,21 @@
             player.style.top = y + 'px';
         });
 
-        // クリック時に場面切り替え
+        // クリック時にシーン切り替えとPythonコードの実行
         document.body.addEventListener('click', function() {
+            // シーン1を非表示
             var scene1 = document.getElementById('scene1');
-            var scene2 = document.getElementById('scene2');
             scene1.style.display = 'none';
+
+            // シーン2を表示
+            var scene2 = document.getElementById('scene2');
             scene2.style.display = 'block';
 
-            fetch('https://your-api-url.com/run-python')
+            // Pythonコードをサーバー側で実行
+            fetch('http://localhost:5000/run_python')  // サーバー側APIを呼び出す
                 .then(response => response.json())
                 .then(data => {
+                    // 結果を画面に表示
                     document.getElementById('python-result').textContent = data.result;
                 })
                 .catch(error => console.error('Error:', error));
