@@ -3,16 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Display</title>
+    <title>GIFを動かす</title>
     <style>
-        body { margin: 0; padding: 20px; text-align: center; }
-        img { width: 80%; max-width: 800px; }
+        body { margin: 0; overflow: hidden; }
+        img { position: absolute; }
     </style>
 </head>
 <body>
-    <h1>画像の表示例</h1>
-    <!-- GitHubにアップロードした画像ファイルを指定 -->
-    <img src="assets/test.jpeg" alt="Player Image">
+    <img id="player" src="https://media.giphy.com/media/26u4dSzZqY1itqOiQ/giphy.gif" alt="Player" width="100" height="100">
+    <script>
+        var player = document.getElementById('player');
+        var x = 50; // 初期位置X
+        var y = 50; // 初期位置Y
+
+        // キー入力イベントをリッスン
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                x -= 5; // 左に移動
+            } else if (event.key === 'ArrowRight') {
+                x += 5; // 右に移動
+            } else if (event.key === 'ArrowUp') {
+                y -= 5; // 上に移動
+            } else if (event.key === 'ArrowDown') {
+                y += 5; // 下に移動
+            }
+
+            // 新しい位置を適用
+            player.style.left = x + 'px';
+            player.style.top = y + 'px';
+        });
+    </script>
 </body>
 </html>
-
