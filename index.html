@@ -34,6 +34,35 @@
     </div>
 
     <script>
+        var player = document.getElementById('player');
+        var x = 100; // 初期X座標
+        var y = 100; // 初期Y座標
+
+        // 画面の幅と高さを取得
+        var screenWidth = window.innerWidth;
+        var screenHeight = window.innerHeight;
+
+        // プレイヤーの初期位置を設定
+        player.style.left = x + 'px';
+        player.style.top = y + 'px';
+
+        // キー入力イベントでプレイヤーを動かす
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                x -= 10; // 左に移動
+            } else if (event.key === 'ArrowRight') {
+                x += 10; // 右に移動
+            } else if (event.key === 'ArrowUp') {
+                y -= 10; // 上に移動
+            } else if (event.key === 'ArrowDown') {
+                y += 10; // 下に移動
+            }
+
+            // 新しい位置を適用
+            player.style.left = x + 'px';
+            player.style.top = y + 'px';
+        });
+
         var currentScene = 1;
 
         // シーン切り替え処理
