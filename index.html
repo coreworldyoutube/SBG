@@ -13,8 +13,22 @@
     <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
     <script>
         var player = document.getElementById('player');
-        var x = 120; // 初期位置X
-        var y = 120; // 初期位置Y
+        
+        // 画面の幅と高さを取得
+        var screenWidth = window.innerWidth;
+        var screenHeight = window.innerHeight;
+
+        // 画像のサイズ
+        var playerWidth = player.width;
+        var playerHeight = player.height;
+
+        // 初期位置を画面の中心に設定
+        var x = (screenWidth - playerWidth) / 2;
+        var y = (screenHeight - playerHeight) / 2;
+
+        // 初期位置を適用
+        player.style.left = x + 'px';
+        player.style.top = y + 'px';
 
         // キー入力イベントをリッスン
         window.addEventListener('keydown', function(event) {
