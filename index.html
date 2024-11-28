@@ -7,20 +7,11 @@
     <style>
         body { margin: 0; overflow: hidden; }
         img { position: absolute; }
-        .scene { display: none; }
     </style>
 </head>
 <body>
-    <!-- シーン1 -->
-    <div id="scene1" class="scene">
-        <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
-    </div>
-
-    <!-- シーン2 -->
-    <div id="scene2" class="scene">
-        <h1>Pythonコード結果:</h1>
-        <pre id="python-result"></pre>
-    </div>
+    <!-- GIF画像を読み込みます -->
+    <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
 
     <script>
         var player = document.getElementById('player');
@@ -29,48 +20,40 @@
         var screenWidth = window.innerWidth;
         var screenHeight = window.innerHeight;
 
-        // 画像のサイズ
-        var playerWidth = player.width;
-        var playerHeight = player.height;
+        // 画像のサイズがロードされてから位置を設定
+        player.onload = function() {
+            // 画像のサイズ
+            var playerWidth = player.width;
+            var playerHeight = player.height;
 
-        // 初期位置を画面の中心に設定
-        var x = (screenWidth - playerWidth) / 2;
-        var y = (screenHeight - playerHeight) / 2;
+            // 初期位置を画面の中心に設定
+            var x = (screenWidth - playerWidth) / 2;
+            var y = (screenHeight - playerHeight) / 2;
 
-        // 初期位置を適用
-        player.style.left = x + 'px';
-        player.style.top = y + 'px';
+            // 初期位置を適用
+            player.style.left = x + 'px';
+            player.style.top = y + 'px';
+        }
 
         // キー入力イベントをリッスン
         window.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowLeft') { x -= 15; }
-            if (event.key === 'ArrowRight') { x += 15; }
-            if (event.key === 'ArrowUp') { y -= 15; }
-            if (event.key === 'ArrowDown') { y += 15; }
+            // 画像の位置を変更する処理
+            var x = parseInt(player.style.left) || 0;
+            var y = parseInt(player.style.top) || 0;
+
+            if (event.key === 'ArrowLeft') {
+                x -= 15; // 左に移動
+            } else if (event.key === 'ArrowRight') {
+                x += 15; // 右に移動
+            } else if (event.key === 'ArrowUp') {
+                y -= 15; // 上に移動
+            } else if (event.key === 'ArrowDown') {
+                y += 15; // 下に移動
+            }
 
             // 新しい位置を適用
             player.style.left = x + 'px';
             player.style.top = y + 'px';
-        });
-
-        // クリック時にシーン切り替えとPythonコードの実行
-        document.body.addEventListener('click', function() {
-            // シーン1を非表示
-            var scene1 = document.getElementById('scene1');
-            scene1.style.display = 'none';
-
-            // シーン2を表示
-            var scene2 = document.getElementById('scene2');
-            scene2.style.display = 'block';
-
-            // Pythonコードをサーバー側で実行
-            fetch('http://localhost:5000/run_python')  // サーバー側APIを呼び出す
-                .then(response => response.json())
-                .then(data => {
-                    // 結果を画面に表示
-                    document.getElementById('python-result').textContent = data.result;
-                })
-                .catch(error => console.error('Error:', error));
         });
     </script>
 </body>
