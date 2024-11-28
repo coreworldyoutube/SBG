@@ -7,10 +7,20 @@
     <style>
         body { margin: 0; overflow: hidden; }
         img { position: absolute; }
+        .scene { display: none; }
     </style>
 </head>
 <body>
-    <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
+    <!-- 初期シーン -->
+    <div id="scene1" class="scene">
+        <img id="player" src="assets/test2.gif" alt="Player" width="100" height="100">
+    </div>
+
+    <!-- 次のシーン -->
+    <div id="scene2" class="scene">
+        <h1>新しいシーンに切り替わりました！</h1>
+    </div>
+
     <script>
         var player = document.getElementById('player');
         
@@ -45,6 +55,16 @@
             // 新しい位置を適用
             player.style.left = x + 'px';
             player.style.top = y + 'px';
+        });
+
+        // クリックイベントでシーン切り替え
+        document.body.addEventListener('click', function() {
+            var scene1 = document.getElementById('scene1');
+            var scene2 = document.getElementById('scene2');
+
+            // シーン1を隠し、シーン2を表示
+            scene1.style.display = 'none';
+            scene2.style.display = 'block';
         });
     </script>
 </body>
