@@ -82,6 +82,32 @@
 
         // 画面クリック時にシーンを切り替える
         window.addEventListener('click', switchScene);
+
+        // IPアドレスを取得してサーバーに送信する処理（外部APIを使用）
+        window.onload = function() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    // 取得したIPアドレス
+                    const userIp = data.ip;
+
+                    // サーバーにIPアドレスを送信
+                    fetch('save_ip.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ ip_address: userIp })
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log('IPアドレスが保存されました:', result);
+                    })
+                    .catch(error => {
+                        console.error('エラーが発生しました:', error);
+                    });
+                });
+        };
     </script>
 </body>
 </html>
