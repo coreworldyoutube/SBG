@@ -24,9 +24,11 @@ if (isset($data['ip_address'])) {
         ];
 
         // 更新したデータを保存
-        file_put_contents('user_ips.json', json_encode($existing_data, JSON_PRETTY_PRINT));
-
-        echo json_encode(['status' => 'success', 'message' => 'IPアドレスが保存されました']);
+        if(file_put_contents('user_ips.json', json_encode($existing_data, JSON_PRETTY_PRINT))) {
+            echo json_encode(['status' => 'success', 'message' => 'IPアドレスが保存されました']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'IPアドレスの保存に失敗しました']);
+        }
     } else {
         echo json_encode(['status' => 'info', 'message' => 'このIPアドレスは既に保存されています']);
     }
