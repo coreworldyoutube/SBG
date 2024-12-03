@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MunetoriNet</title>
     <style>
-        body { margin: 0; overflow: hidden;
-              background-image: url('assets/momiji.jpeg');
-              background-position:
-                  center;
-              background-size: 
-                  cover;
-              background-attachment: fixed; /* スクロール時に背景を固定 */
+        body { 
+            margin: 0; 
+            overflow: 
+                hidden;
+            background-image: 
+                url('assets/momiji.jpeg');
+            background-position: center;
+            background-size:
+                auto 100%; /* 横幅はそのままで、縦を100%に */
+            background-repeat:
+                repeat-y; /* 縦に繰り返す */
+            background-attachment: 
+                fixed; /* スクロール時に背景を固定 */
 }
-
              }
         img { position: absolute; display: block; z-index: 1; }
         .scene {
