@@ -3,59 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MunetoriNet</title>
+    <title>GIF Move</title>
     <style>
         body {
             margin: 0;
-            overflow-y: scroll;
-            height: 100%;
-            background-image: url('assets/momiji.jpeg');
-            background-position: top center;
-            background-size: 100% auto;
-            background-repeat: repeat-y;
-        }
-        html {
-            height: 100%;
-            overflow-y: scroll;
+            overflow: hidden;
         }
         #player {
             position: absolute;
-            z-index: 1;
             width: 100px;
             height: 100px;
-        }
-        .scene {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: none;
-            z-index: 0;
-        }
-        #scene1 {
-            display: block;
-        }
-        #scene2 {
-            display: none;
         }
     </style>
 </head>
 <body>
-    <div id="scene1" class="scene">
-        <img src="assets/scene1.png" alt="Scene 1">
-    </div>
-    <div id="scene2" class="scene">
-        <img id="player" src="assets/test2.gif" alt="Moving GIF">
-    </div>
-
+    <img id="player" src="assets/test2.gif" alt="Player">
     <script>
         var player = document.getElementById('player');
         var x = 100;
         var y = 100;
-        var screenWidth = window.innerWidth;
-        var screenHeight = window.innerHeight;
-
-        player.style.left = x + 'px';
-        player.style.top = y + 'px';
 
         window.addEventListener('keydown', function(event) {
             if (event.key === 'ArrowLeft') {
@@ -65,55 +31,4 @@
             } else if (event.key === 'ArrowUp') {
                 y -= 10;
             } else if (event.key === 'ArrowDown') {
-                y += 10;
-            }
-
-            // 画面内に収める処理
-            x = Math.max(0, Math.min(x, screenWidth - player.width));
-            y = Math.max(0, Math.min(y, screenHeight - player.height));
-
-            player.style.left = x + 'px';
-            player.style.top = y + 'px';
-        });
-
-        var currentScene = 1;
-
-        function switchScene() {
-            if (currentScene === 1) {
-                document.getElementById('scene1').style.display = 'none';
-                document.getElementById('scene2').style.display = 'block';
-                currentScene = 2;
-            } else {
-                document.getElementById('scene2').style.display = 'none';
-                document.getElementById('scene1').style.display = 'block';
-                currentScene = 1;
-            }
-        }
-
-        window.addEventListener('click', switchScene);
-
-        window.onload = function() {
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    const userIp = data.ip;
-
-                    fetch('save_ip.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ ip_address: userIp })
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log('IPアドレスが保存されました:', result);
-                    })
-                    .catch(error => {
-                        console.error('エラーが発生しました:', error);
-                    });
-                });
-        };
-    </script>
-</body>
-</html>
+          
