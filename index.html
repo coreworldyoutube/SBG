@@ -7,18 +7,14 @@
     <style>
         body { 
             margin: 0; 
-            overflow: 
-                auto;
-            background-image: 
-                url('assets/momiji.jpeg');
+            overflow: auto;
+            background-image: url('assets/momiji.jpeg');
             background-position: center;
-            background-size:
-                auto 100%; /* 横幅はそのままで、縦を100%に */
-            background-repeat:
-                repeat-y; /* 縦に繰り返す */
-            background-attachment: 
-                fixed; /* スクロール時に背景を固定 */
+            background-size: cover; /* 画像を画面にフィットさせる */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
 }
+
              }
         img { position: absolute; display: block; z-index: 1; }
         .scene {
