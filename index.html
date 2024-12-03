@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Background with Momiji</title>
     <style>
-        html, body {
-            height: auto; /* 高さを100%に設定 */
-            margin: 0;
-            overflow-y: scroll; /* 縦スクロールを有効に */
-        }
-
         body {
             background-image: url('assets/momiji.jpeg');
             background-size: cover; /* 画像を画面サイズに合わせて拡大縮小 */
-            overflow: auto; /* 必要に応じてスクロールできるように */
+            background-position: top center; /* 上に位置を合わせる */
+            overflow-y: scroll; /* 必要に応じて縦スクロールできる */
+            margin: 0;
         }
     </style>
 </head>
