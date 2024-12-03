@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MunetoriNet</title>
     <style>
-        body { margin: 0; overflow: hidden; }
+        body { margin: 0; overflow: hidden;
+              background-image: url('momiji.jpg');
+              background-size: cover;
+             }
         img { position: absolute; display: block; }
         .scene {
             position: absolute;
@@ -25,20 +28,7 @@
             padding: 10px;
             width: 200px;
         }
-    </style>
-</head>
-<body>
-    <div id="scene1" class="scene">
-        <img src="assets/test2.gif" alt="Player" width="200" height="200" id="player">
-    </div>
-
-    <div id="scene2" class="scene">
-        <h1>シーン2: Pythonの結果表示エリア</h1>
-        <p>ここにPythonの結果や別のコンテンツが表示されます。</p>
-        <label for="inputField">文字を入力してください：</label>
-        <input type="text" id="inputField" placeholder="ここに入力">
-    </div>
-
+    
     <script>
         var player = document.getElementById('player');
         var x = 100;
