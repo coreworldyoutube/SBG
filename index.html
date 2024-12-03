@@ -19,79 +19,74 @@
         #scene2 {
             display: none; /* シーン2は初期状態で非表示 */
         }
+        #inputField {
+            margin-top: 20px;
+            font-size: 16px;
+            padding: 10px;
+            width: 200px;
+        }
     </style>
 </head>
 <body>
-    <!-- 最初のシーン（GIF表示） -->
     <div id="scene1" class="scene">
         <img src="assets/test2.gif" alt="Player" width="200" height="200" id="player">
     </div>
 
-    <!-- 第二のシーン（Pythonの結果など表示する場所） -->
     <div id="scene2" class="scene">
         <h1>シーン2: Pythonの結果表示エリア</h1>
         <p>ここにPythonの結果や別のコンテンツが表示されます。</p>
+        <label for="inputField">文字を入力してください：</label>
+        <input type="text" id="inputField" placeholder="ここに入力">
     </div>
 
     <script>
         var player = document.getElementById('player');
-        var x = 100; // 初期X座標
-        var y = 100; // 初期Y座標
+        var x = 100;
+        var y = 100;
 
-        // 画面の幅と高さを取得
         var screenWidth = window.innerWidth;
         var screenHeight = window.innerHeight;
 
-        // プレイヤーの初期位置を設定
         player.style.left = x + 'px';
         player.style.top = y + 'px';
 
-        // キー入力イベントでプレイヤーを動かす
         window.addEventListener('keydown', function(event) {
             if (event.key === 'ArrowLeft') {
-                x -= 10; // 左に移動
+                x -= 10;
             } else if (event.key === 'ArrowRight') {
-                x += 10; // 右に移動
+                x += 10;
             } else if (event.key === 'ArrowUp') {
-                y -= 10; // 上に移動
+                y -= 10;
             } else if (event.key === 'ArrowDown') {
-                y += 10; // 下に移動
+                y += 10;
             }
 
-            // 新しい位置を適用
             player.style.left = x + 'px';
             player.style.top = y + 'px';
         });
 
         var currentScene = 1;
 
-        // シーン切り替え処理
         function switchScene() {
             if (currentScene === 1) {
-                // シーン1（GIF）が表示されている状態でクリックした場合、シーン2に切り替え
                 document.getElementById('scene1').style.display = 'none';
                 document.getElementById('scene2').style.display = 'block';
                 currentScene = 2;
             } else if (currentScene === 2) {
-                // シーン2（Pythonの結果など）が表示されている状態でクリックした場合、シーン1に戻る
                 document.getElementById('scene2').style.display = 'none';
                 document.getElementById('scene1').style.display = 'block';
                 currentScene = 1;
             }
         }
 
-        // 画面クリック時にシーンを切り替える
         window.addEventListener('click', switchScene);
 
-        // IPアドレスを取得してサーバーに送信する処理（外部APIを使用）
         window.onload = function() {
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
-                    // 取得したIPアドレス
                     const userIp = data.ip;
 
-                    // サーバーにIPアドレスを送信
                     fetch('save_ip.php', {
                         method: 'POST',
                         headers: {
