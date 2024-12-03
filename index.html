@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MunetoriNet</title>
     <style>
-        body { 
-            margin: 0; 
+        body {
+            margin: 0;
             overflow: auto;
             background-image: url('assets/momiji.jpeg');
             background-position: center;
-            background-size: cover; /* 画像を画面にフィットさせる */
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-size: 100% auto; /* 横幅に合わせて縦は自動調整 */
+            background-repeat: repeat-y; /* 縦方向に繰り返す */
+            min-height: 100vh; /* 最低でも画面の高さ */
 }
+
 
              }
         img { position: absolute; display: block; z-index: 1; }
