@@ -7,6 +7,7 @@
     <style>
         body {
             margin: 0;
+            background-color: blue; /* 背景を青に */
             overflow: hidden;
         }
         #player {
@@ -18,25 +19,6 @@
 </head>
 <body>
     <img id="player" src="assets/test2.gif" alt="Player">
-    <script>
-        var player = document.getElementById('player');
-        var x = 100;
-        var y = 100;
-
-        window.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowLeft') {
-                x -= 10;
-            } else if (event.key === 'ArrowRight') {
-                x += 10;
-            } else if (event.key === 'ArrowUp') {
-                y -= 10;
-            } else if (event.key === 'ArrowDown') {
-                y += 10;
-            }
-
-            player.style.left = x + 'px';
-            player.style.top = y + 'px';
-        });
-    </script>
 </body>
 </html>
+
