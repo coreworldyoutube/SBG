@@ -7,47 +7,50 @@
     <style>
         body {
             margin: 0;
-            overflow-y: scroll; /* 縦スクロールを有効に */
-            height: 100%; /* 画面の高さに合わせる */
+            overflow-y: scroll;
+            height: 100%;
             background-image: url('assets/momiji.jpeg');
             background-position: top center;
-            background-size: 100% auto; /* 横幅に合わせて縦は自動調整 */
-            background-repeat: repeat-y; /* 縦に繰り返し表示 */
+            background-size: 100% auto;
+            background-repeat: repeat-y;
         }
         html {
             height: 100%;
-            overflow-y: scroll; /* 縦スクロールを有効に */
+            overflow-y: scroll;
         }
-
-
-
-             }
-        img { position: absolute; display: block; z-index: 1; }
+        #player {
+            position: absolute;
+            z-index: 1;
+            width: 100px;
+            height: 100px;
+        }
         .scene {
             position: absolute;
             width: 100%;
             height: 100%;
             display: none;
-            z-index: 0; /* 背景よりも下に表示 */
+            z-index: 0;
         }
         #scene1 {
-            display: block; /* 最初のシーンだけ表示 */
+            display: block;
         }
         #scene2 {
-            display: none; /* シーン2は初期状態で非表示 */
+            display: none;
         }
-        #inputField {
-            margin-top: 20px;
-            font-size: 16px;
-            padding: 10px;
-            width: 200px;
-        }
-    
+    </style>
+</head>
+<body>
+    <div id="scene1" class="scene">
+        <img src="assets/scene1.png" alt="Scene 1">
+    </div>
+    <div id="scene2" class="scene">
+        <img id="player" src="assets/test2.gif" alt="Moving GIF">
+    </div>
+
     <script>
         var player = document.getElementById('player');
         var x = 100;
         var y = 100;
-
         var screenWidth = window.innerWidth;
         var screenHeight = window.innerHeight;
 
@@ -65,6 +68,10 @@
                 y += 10;
             }
 
+            // 画面内に収める処理
+            x = Math.max(0, Math.min(x, screenWidth - player.width));
+            y = Math.max(0, Math.min(y, screenHeight - player.height));
+
             player.style.left = x + 'px';
             player.style.top = y + 'px';
         });
@@ -75,11 +82,11 @@
             if (currentScene === 1) {
                 document.getElementById('scene1').style.display = 'none';
                 document.getElementById('scene2').style.display = 'block';
-               
-            } else if (currentScene === 2) {
+                currentScene = 2;
+            } else {
                 document.getElementById('scene2').style.display = 'none';
                 document.getElementById('scene1').style.display = 'block';
-                currentScene = 1;   
+                currentScene = 1;
             }
         }
 
